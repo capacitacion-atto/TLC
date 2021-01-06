@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Atento - Usuarios Capacitación</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <script>
+  var rhis=[];
+  //***********************************
+    function historico(){
+	  var newRowContent;var dni=$("#txtb").val()
+	  $("#loader").show();$("#2").hide();
+	  var lkn="https://script.google.com/macros/s/AKfycbyEWKNZ_QhB2QxrO3QNanfIbv8Y_MlGqV5YyAgcr7Bf2Y_WnZg/exec?dni="+dni
+	  
+      $.getJSON(lkn,function (data) {
+       if (data.user.length> 0){
+	     
+		 for(a=0;a<data.user.length;a++){var sss="<button class='btn btn-secondary lhist' onclick="+"ver('"+a+"')>VER</button>";
+		 newRowContent += "<tr><td>"+data.user[a]["ID"]+"</td><td>"+data.user[a]["FEC"]+"</td><td>"+data.user[a]["HS"]+"</td><td>"+sss+"</td></tr>"};
+		 $("#thist").append(newRowContent);	
+		 setTimeout($("#loader").hide(),4000)
+		 $("#5").show();rhis=data.user
+	  }else{$("#nohist").modal('show')}})}
+	    
+		
+	function ver(ix){
+	$("#rhid").html(rhis[ix]["ID"])
+	$("#rhini").val(rhis[ix]["IN"])
+	$("#rhdias").val(rhis[ix]["DIAS"])
+	$("#rhfin").val(rhis[ix]["FIN"])
+	$("#rhdiag").val(rhis[ix]["DIAG"])
+	$("#modalhist").show()
+	}
+//***********************************
+function validarpri(){
+var valor=$("#rcdni").val();var valor2=$("#rcing").val();var valor3=$("#rcan").val();var valor4=$("#rcnt").val();var lkn="https://script.google.com/macros/s/AKfycbzua5M75XednRUgRuSmuHduy7bmw1gqWwXcZY6bEldS6-D7SUkJ/exec?dni="+valor+"&an="+valor3+"&ai="+valor2+"&nt="+valor4
+      $.getJSON(lkn,function (data) {
+	  var vk=data.user;
+       if(vk==3){$("#loginpricla").modal('show');$("#loginpri").modal('hide')}else{alert("no")}})}
+	
+  //********************************
+    
+  function buscar(){
+	  $("#loader").show();$("#1").hide();
+	  var valor=$("#txtb").val();var valor2=$("#txtb1").val();var lkn="https://script.google.com/macros/s/AKfycbyEWKNZ_QhB2QxrO3QNanfIbv8Y_MlGqV5YyAgcr7Bf2Y_WnZg/exec?dni="+valor+"&ps="+valor2
+		
+      $.getJSON(lkn,function (data) {
+       if (data.user.length> 0){
+         $("#tnt").html(data.user[0]["NT"]);
+		 $("#tasesor").html(data.user[0]["ASESOR"]);
+		 $("#UGAP").html(data.user[0]["GAP"]);
+		 $("#PGAP").html(data.user[0]["PGAP"]);
+		 $("#tpstlc").html(data.user[0]["PWINCRM"]);
+		 $("#tpf").html(data.user[0]["PNT"]);
+		 $("#tutlc").html(data.user[0]["WINCRM"]);
+		 $("#tutlc2").html(data.user[0]["WINCRM"]);
+		 $("#tida").html(data.user[0]["IDA"]);
+		 $("#tintr").html(data.user[0]["INTRA"]);
+		 
+		 
+		 setTimeout($("#loader").hide(),4000)
+		$("#2").show()
+      }
+	  else{$("#login").modal('show')}
+	  })}
+	  
+ //***********************************
+//GRABAR REGISTRO
+var url = 'https://script.google.com/macros/s/AKfycbyc9tL_Pn_pqvbCwhteFAUUw2hIwljuMivSgbtKqFZJnCjnqUKw/exec';
+function grabar(){
+   $("#loader").show();$("#3").hide();$("#4").hide();
+  var ahora=new Date();
+  var gid=('0' + ahora.getDate()).slice(-2)+('0' + ahora.getHours()).slice(-2)+('0' + ahora.getMinutes()).slice(-2)+$("#txtb").val();
+  var r2=gfecha()
+  var r3=ghora()
+  var r4=$("#txtb").val();
+  var r5=$("#tlic").val();
+  var r6=$("#ilic").val();
+  var r7=$("#flic").val();
+  var r8=$("#tdias").val();
+  var r9="NO"
+  if($("#tmatp").val()==""){var r10="NO"}else{var r10=$("#tmatp").val();}
+  if($("#tesp").val()==""){var r11="NO"}else{var r11=$("#tesp").val();}
+  if($("#tdiag").val()==""){var r12="NO"}else{var r12=$("#tdiag").val();}
+ 
+    
+  var jqxhr = $.ajax({
+    url: url,
+    method: "POST",
+    dataType: "json",
+    data: {"ID":gid,"FEC":r2,"HS":r3,"DNI":r4,"TIP":r5,"IN":r6,"FIN":r7,"DIAS":r8,"VAL":r9,"MP":r10,"ESP":r11,"DIAG":r12},
+	success: function (msg) {if(msg.row>0){setTimeout($("#loader").hide(),4000);$("#tidf").val(gid);$("#modal1f").show();}}})
+
+}
+
+
+//************************************* 
+	  
+ 
+  function verifica_datos(){
+  if($("#ttel").val()=="NO POSEE" ){$('#modal1').modal("show")}else{$("#3").show();$("#2").hide()}
+  }
+  
+  function restar_fechas(){
+  var f1 = $("#ilic").val();var f2 = $("#tdias").val();
+ if(!f1==""){
+ if(!f2==""){
+ var f3=f1.slice(3,5)+"/"+f1.slice(0,2)+"/"+f1.slice(6,10)
+ var aFecha1 = new Date(f3)
+ var dias = parseInt(f2-1);
+aFecha1.setDate(aFecha1.getDate() + dias);
+ $("#flic").val(('0' + aFecha1.getDate()).slice(-2) + '/' + ('0' + (aFecha1.getMonth()+1)).slice(-2) + '/' + aFecha1.getFullYear())
+ }}}
+ 
+ 
+
+$(function(){$("#ilic").datepicker({showOtherMonths: true, selectOtherMonths: true,onSelect: function(){restar_fechas()}});});
+function gfecha(){
+	var dac = new Date()
+	var dia = ('0' + dac.getDate()).slice(-2);var mes = ('0' + (dac.getMonth()+1)).slice(-2);var ano=dac.getFullYear()
+	var conc=dia+"/"+mes+"/"+ano
+	return conc
+}
+function ghora(){
+	var dac1 = new Date()
+	var hr = ('0' + dac1.getHours()).slice(-2);var mn = ('0' + (dac1.getMinutes())).slice(-2)
+	var conc=hr+":"+mn
+	return conc
+}
+
+  </script>
+  <script>
+$.fn.serializeObject = function() {
+    var o = Object.create(null),
+        elementMapper = function(element) {
+            element.name = $.camelCase(element.name);
+            return element;
+        },
+        appendToResult = function(i, element) {
+            var node = o[element.name];
+
+            if ('undefined' != typeof node && node !== null) {
+                o[element.name] = node.push ? node.push(element.value) : [node, element.value];
+            } else {
+                o[element.name] = element.value;
+            }
+        };
+
+    $.each($.map(this.serializeArray(), elementMapper), appendToResult);
+    return o;
+};
+
+//
+// TEST
+//
+$(function() {
+    $('form').submit(function() {
+        $('#result').text(JSON.stringify($('form').serializeObject()));
+        return false;
+    });
+});
+</script>
+  <style>
+#container{ flex: 1 0 auto;}  
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+fieldset{border:1px solid #293E6B;padding: 10px;border-radius: 7px;}
+.lhist{height:20px;font-size: 10px;padding: 2px;width:30px;}
+.table td{padding: .50rem}
+#loader {
+display:none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 90px;
+  height: 90px;
+  margin: -45px 0 0 -45px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 90px;
+  height: 90px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+  </style>
+</head>
+<body>
+
+<div class="text-center h-10" style="margin-bottom:0;background-color:#293E6B;">
+<img src="media/logo.png" style="height:50px;"/>
+</div>
+
+
+<div class="container" style="margin-top:15px">
+     <!-- ********** 1RA PANTALLA ***********--> 
+    <div id="1"class="col-sm-12" style="display:block;justify-content: center;align-items: center">
+      <h2>Hola</h2><h5>Bienvenido!</h5>
+      <p>Para comenzar, por favor realizar busqueda por DNI</p>
+	  <div style="width:300px;height:200px;text-align:center;" >
+      
+	  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Dni&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span>
+    </div>
+	<input id="txtb"  class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "8" style="width:%;text-align:center;height:40px;font-size:25px;color:#293E6B;font-weight:bold;"/>
+    </div>
+<!--<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Contrase&ntilde;a</span>
+    </div>
+	<input id="txtb1" class="form-control" type = "password" maxlength = "8" style="text-align:center;height:40px;font-size:25px;color:#293E6B;font-weight:bold;"/>
+	 </div>  -->
+	 <button id="bt1" class="btn btn-primary" style="width:60%" onclick="buscar()">Buscar</button>
+	 <button id="bt1" class="btn btn-secondary" style="width:38%"onclick="Window.close()">Salir</button>
+	 <!--<a href="javascript:$('#loginpri').modal('show')" style="text-decoration:none;"<h6>Primer Ingreso? Continuar aqui</h6></a>-->
+	  </div>
+	 
+  </div>
+  
+  <div id="loader"></div>
+ <!-- ********** 2DA PANTALLA ***********--> 
+  <div id="2" class="col-sm-12" style="display:none">
+<nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">MIS DATOS</span></nav>	
+  <table class="table" style="font-size:11px;">
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">ASESOR :</td><td id="tasesor"></td></tr>
+  </table>
+  <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">GAP</span></nav>
+  <table class="table" style="font-size:11px;">
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO :</td><td id="UGAP"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS:</td><td id="PGAP"></td></tr>
+  </table>
+  <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">USUARIO FORTI</span></nav>
+  <table class="table" style="font-size:11px;">
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO</td><td id="tnt"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS</td><td id="tpf"></td></tr>
+  </table>
+  <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">USUARIO WIN/CRM/INTRA TLC</span></nav>
+  <table class="table" style="font-size:11px;">
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO [WIN-CRM]</td><td id="tutlc"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS</td><td id="tpstlc"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO [INTRA]</td><td id="tutlc2"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS</td><td id="tintr"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">AVAYA:</td><td id="tida"></td></tr>
+  </table>
+  
+
+
+</div>
+</div>
+<!--*******************3RA PANTALLA---- NUEVO -------------->
+
+
+
+
+ 
+ 
+ <footer id="footer" class="py-2 bg-dark text-white-50 ">
+    <div class="container text-center">
+      <small>Copyright &copy; Atento | 2020</small>
+    </div>
+  </footer>
+
+ 
+</body>
+</html>
