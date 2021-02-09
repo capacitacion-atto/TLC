@@ -4,6 +4,7 @@
   <title>Atento - Usuarios Capacitación</title>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" value="notranslate">
   <meta http-equiv="Content-Security-Policy" content="default-src *; style-src *  'unsafe-inline'; script-src *  'unsafe-inline'; media-src *">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="js/jquery.min.js"></script>
@@ -49,26 +50,29 @@ var valor=$("#rcdni").val();var valor2=$("#rcing").val();var valor3=$("#rcan").v
     
   function buscar(){
 	  $("#loader").show();$("#1").hide();
-	  var valor=$("#txtb").val();var valor2=$("#txtb1").val();var lkn="https://script.google.com/macros/s/AKfycbyEWKNZ_QhB2QxrO3QNanfIbv8Y_MlGqV5YyAgcr7Bf2Y_WnZg/exec?dni="+valor+"&ps="+valor2
+	  var crmv;var valor=$("#txtb").val();var valor2=$("#txtb1").val();var lkn="https://script.google.com/macros/s/AKfycbwfkUHyryz1H622nDf6lYWe09Pbhe0oC-OVh0hIxUsIfnb6c4Mhxc8-/exec?dni="+valor+"&ps="+valor2
+																				
 		
       $.getJSON(lkn,function (data) {
        if (data.user.length> 0){
+		 if(data.user[0]["PASS"]==$("#txtpss").val()){
+	   
          $("#tnt").html(data.user[0]["NT"]);
 		 $("#tasesor").html(data.user[0]["ASESOR"]);
 		 $("#UGAP").html(data.user[0]["GAP"]);
 		 $("#PGAP").html(data.user[0]["PGAP"]);
 		 $("#tpstlc").html(data.user[0]["PWINCRM"]);
 		 $("#tpf").html(data.user[0]["PNT"]);
-		 $("#tutlc").html(data.user[0]["WINCRM"]);
+		crmv='tc-ext&bsol;'+data.user[0]["WINCRM"];$("#tutlc").html(crmv);
 		 $("#tutlc2").html(data.user[0]["WINCRM"]);
 		 $("#tida").html(data.user[0]["IDA"]);
 		 $("#tintr").html(data.user[0]["INTRA"]);
 		 
 		 
-		 setTimeout($("#loader").hide(),4000)
+		 setTimeout($("#loader").hide(),3000)
 		$("#2").show()
-      }
-	  else{$("#login").modal('show')}
+      }else{alert("Los datos ingresados, son incorrectos.");$("#loader").hide();$("#1").show()} }
+	  else{alert("Los datos ingresados, son incorrectos.");$("#loader").hide();$("#1").show();$("#txtpss").val("");$("#txtb").val("");$("#txtb").focus()}
 	  })}
 	  
  //***********************************
@@ -232,7 +236,9 @@ input[type=number]::-webkit-outer-spin-button {
   </style>
 </head>
 <body>
-
+<div class="alert alert-danger" role="alert" style="display:none;">
+  Los datos ingresados son <b>incorrectos</b>,reintente por favor
+</div>
 <div class="text-center h-10" style="margin-bottom:0;background-color:#293E6B;">
 <img src="media/logo.png" style="height:50px;"/>
 </div>
@@ -250,7 +256,13 @@ input[type=number]::-webkit-outer-spin-button {
       <span class="input-group-text">Dni&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </span>
     </div>
 	<input id="txtb"  class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "8" style="width:%;text-align:center;height:40px;font-size:25px;color:#293E6B;font-weight:bold;"/>
+	</div>
+	<div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Año Nac&nbsp&nbsp&nbsp&nbsp&nbsp </span>
     </div>
+	<input id="txtpss"  class="form-control" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "4" style="width:%;text-align:center;height:40px;font-size:25px;color:#293E6B;font-weight:bold;"/>
+	</div>
 <!--<div class="input-group mb-3">
     <div class="input-group-prepend">
       <span class="input-group-text">Contrase&ntilde;a</span>
