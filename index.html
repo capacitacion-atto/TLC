@@ -50,7 +50,8 @@ var valor=$("#rcdni").val();var valor2=$("#rcing").val();var valor3=$("#rcan").v
     
   function buscar(){
 	  $("#loader").show();$("#1").hide();
-	  var crmv;var valor=$("#txtb").val();var valor2=$("#txtb1").val();var lkn="https://script.google.com/macros/s/AKfycbwfkUHyryz1H622nDf6lYWe09Pbhe0oC-OVh0hIxUsIfnb6c4Mhxc8-/exec?dni="+valor+"&ps="+valor2
+	  var crmv;var valor=$("#txtb").val();var valor2=$("#txtb1").val();var lkn="https://script.google.com/macros/s/AKfycbzeXU6L5Ur5gKf-Y0rDHXrucdFxb_eh5SqPR2tMkpn6srVev8LJMp3W1fdUec2y1k21/exec?dni="+valor+"&ps="+valor2
+																									
 																				
 		
       $.getJSON(lkn,function (data) {
@@ -63,6 +64,7 @@ var valor=$("#rcdni").val();var valor2=$("#rcing").val();var valor3=$("#rcan").v
 		 $("#PGAP").html(data.user[0]["PGAP"]);
 		 $("#tpstlc").html(data.user[0]["PWINCRM"]);
 		 $("#tpf").html(data.user[0]["PNT"]);
+		 $("#tip").html(data.user[0]["NIP"]);
 		crmv='tc-ext&bsol;'+data.user[0]["WINCRM"];$("#tutlc").html(crmv);
 		 $("#tutlc2").html(data.user[0]["WINCRM"]);
 		 $("#tida").html(data.user[0]["IDA"]);
@@ -292,6 +294,7 @@ input[type=number]::-webkit-outer-spin-button {
   <table class="table" style="font-size:11px;">
    <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO</td><td id="tnt"></td></tr>
    <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS</td><td id="tpf"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">IP TLC</td><td id="tip"></td></tr>
   </table>
   <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">USUARIO WIN/CRM/INTRA TLC</span></nav>
   <table class="table" style="font-size:11px;">
