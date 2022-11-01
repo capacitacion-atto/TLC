@@ -65,7 +65,7 @@ var valor=$("#rcdni").val();var valor2=$("#rcing").val();var valor3=$("#rcan").v
 		 $("#tpstlc").html(data.user[0]["PWINCRM"]);
 		 $("#tpf").html(data.user[0]["PNT"]);
 		 $("#tip").html(data.user[0]["NIP"]);
-		crmv='tc-ext&bsol;'+data.user[0]["WINCRM"];$("#tutlc").html(crmv);
+		crmv=data.user[0]["WINCRM"];$("#tutlc").html(crmv);
 		 $("#tutlc2").html(data.user[0]["WINCRM"]);
 		 $("#tida").html(data.user[0]["IDA"]);
 		 $("#tintr").html(data.user[0]["INTRA"]);
@@ -290,11 +290,10 @@ input[type=number]::-webkit-outer-spin-button {
    <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO :</td><td id="UGAP"></td></tr>
    <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS:</td><td id="PGAP"></td></tr>
   </table>
-  <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">USUARIO FORTI</span></nav>
+  <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">USUARIO NT</span></nav>
   <table class="table" style="font-size:11px;">
    <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO</td><td id="tnt"></td></tr>
    <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS</td><td id="tpf"></td></tr>
-   <tr><td CLASS="bg-dark" style="color:white;width:30%">IP TLC</td><td id="tip"></td></tr>
   </table>
   <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">USUARIO WIN/CRM/INTRA TLC</span></nav>
   <table class="table" style="font-size:11px;">
@@ -325,3 +324,4 @@ input[type=number]::-webkit-outer-spin-button {
  
 </body>
 </html>
+
