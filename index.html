@@ -50,7 +50,7 @@ var valor=$("#rcdni").val();var valor2=$("#rcing").val();var valor3=$("#rcan").v
     
   function buscar(){
 	  $("#loader").show();$("#1").hide();
-	  var crmv;var valor=$("#txtb").val();var valor2=$("#txtb1").val();var lkn="https://script.google.com/macros/s/AKfycbzeXU6L5Ur5gKf-Y0rDHXrucdFxb_eh5SqPR2tMkpn6srVev8LJMp3W1fdUec2y1k21/exec?dni="+valor+"&ps="+valor2
+	  var crmv;var valor=$("#txtb").val();var valor2=$("#txtb1").val();var lkn="https://script.google.com/macros/s/AKfycbzXXmgDPFG1AT002u8U_wXXWkG43r_qhr26jawtYT080yx5K5PfBcym-68COYPMf3I/exec?dni="+valor+"&ps="+valor2
 																									
 																				
 		
@@ -60,13 +60,15 @@ var valor=$("#rcdni").val();var valor2=$("#rcing").val();var valor3=$("#rcan").v
 	   
          $("#tnt").html(data.user[0]["NT"]);
 		 $("#tasesor").html(data.user[0]["ASESOR"]);
+		 $("#TDNI").html(data.user[0]["GAP"]);
+		 $("#THOR").html(data.user[0]["NIP"]);
+		 $("#TJOR").html(data.user[0]["JOR"]); 
 		 $("#UGAP").html(data.user[0]["GAP"]);
 		 $("#PGAP").html(data.user[0]["PGAP"]);
 		 $("#tpstlc").html(data.user[0]["PWINCRM"]);
 		 $("#tpf").html(data.user[0]["PNT"]);
 		 $("#tip").html(data.user[0]["NIP"]);
-		crmv=data.user[0]["WINCRM"];$("#tutlc").html(crmv);
-		 $("#tutlc2").html(data.user[0]["WINCRM"]);
+		 $("#tutlc").html(data.user[0]["WINCRM"]);
 		 $("#tida").html(data.user[0]["IDA"]);
 		 $("#tintr").html(data.user[0]["INTRA"]);
 		 
@@ -280,27 +282,29 @@ input[type=number]::-webkit-outer-spin-button {
   
   <div id="loader"></div>
  <!-- ********** 2DA PANTALLA ***********--> 
-  <div id="2" class="col-sm-12" style="display:none">
+  <div id="2" class="col-sm-12" style="display:none;overflow-x:hidden;overflow-y:auto" >
 <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">MIS DATOS</span></nav>	
   <table class="table" style="font-size:11px;">
    <tr><td CLASS="bg-dark" style="color:white;width:30%">ASESOR :</td><td id="tasesor"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">DNI :</td><td id="TDNI"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">JORNADA</td><td id="TJOR"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">HORARIO TEORICO</td><td id="THOR"></td></tr>
   </table>
   <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">GAP</span></nav>
   <table class="table" style="font-size:11px;">
    <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO :</td><td id="UGAP"></td></tr>
    <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS:</td><td id="PGAP"></td></tr>
   </table>
-  <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">USUARIO NT</span></nav>
+  <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">USUARIO FORTI</span></nav>
   <table class="table" style="font-size:11px;">
    <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO</td><td id="tnt"></td></tr>
    <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS</td><td id="tpf"></td></tr>
   </table>
   <nav class="navbar navbar-dark bg-dark"style="padding: .1rem 0.1rem;"><span style="color:white;text-align:center;width:100%">USUARIO WIN/CRM/INTRA TLC</span></nav>
   <table class="table" style="font-size:11px;">
-   <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO [WIN-CRM]</td><td id="tutlc"></td></tr>
-   <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS</td><td id="tpstlc"></td></tr>
-   <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO [INTRA]</td><td id="tutlc2"></td></tr>
-   <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS</td><td id="tintr"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">USUARIO [WIN-CRM -INTRA]</td><td id="tutlc"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS WIN-CRM</td><td id="tpstlc"></td></tr>
+   <tr><td CLASS="bg-dark" style="color:white;width:30%">PASS INTRA</td><td id="tintr"></td></tr>
    <tr><td CLASS="bg-dark" style="color:white;width:30%">AVAYA:</td><td id="tida"></td></tr>
   </table>
   
@@ -324,4 +328,3 @@ input[type=number]::-webkit-outer-spin-button {
  
 </body>
 </html>
-
